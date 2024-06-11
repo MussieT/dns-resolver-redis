@@ -1,0 +1,12 @@
+services:
+  cache:
+    container_name: dns-resolver-cache
+    # Run as privileged to allow the container to change the vm.overcommit_memory setting
+    privileged: true
+    build: ./redis
+    volumes:
+      - "./healthchecks:/healthchecks"
+    entrypoint: ["sh", "-c", "./entry.sh"]
+    healthcheck:
+      test: /healthchecks/healthcheck.sh
+      interval: "5s"
