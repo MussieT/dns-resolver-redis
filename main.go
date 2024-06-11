@@ -2,15 +2,22 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"os"
 	"reflect"
 
+	"github.com/dns-resolver-redis/connect"
 	"github.com/dns-resolver-redis/parser"
-	"github.com/dns-resolver-redis/redis"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
+	
 	if len(os.Args) < 2 {
 		fmt.Println("Please provide a domain name as an argument.")
 		os.Exit(1)
@@ -33,7 +40,7 @@ func main() {
 		ipStrings[i] = ip.String()
 	}
 
-	redis.SetValue(domain, ips)
+	connect.SetValue(domain, ips)
 	
 	// redisConf(ips)
 	fmt.Printf("Type %s", reflect.TypeOf(ips))
