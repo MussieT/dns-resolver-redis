@@ -1,4 +1,4 @@
-package redis
+package connect
 
 import (
 	"context"
@@ -11,6 +11,7 @@ import (
 )
 
 func redisConf() redis.Client {
+	fmt.Println(os.Getenv("REDIS_ADDRESS"))
 	client := redis.NewClient(&redis.Options{
         Addr:	  os.Getenv("REDIS_ADDRESS"),
         Password: os.Getenv("PASSWORD"), // no password set
