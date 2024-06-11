@@ -6,7 +6,7 @@ services:
     build: ./redis
     volumes:
       - "./healthchecks:/healthchecks"
-    entrypoint: ["sh", "-c", "./entry.sh"]
+    # entrypoint: ["sh", "-c", "./entry.sh"]
     healthcheck:
       test: /healthchecks/healthcheck.sh
       interval: "5s"
